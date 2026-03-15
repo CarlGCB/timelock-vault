@@ -13,6 +13,9 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
+<!-- Librería de cifrado -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
 <script>
 
 const firebaseConfig = {
@@ -26,7 +29,6 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
 const db = firebase.firestore();
 
 </script>
@@ -36,15 +38,11 @@ const db = firebase.firestore();
 <body>
 
 <header>
-
 <h1>🔐 TimeLock Vault</h1>
 <p>Mensajes protegidos con temporizador</p>
-
 </header>
 
 <main>
-
-<!-- HOME -->
 
 <section id="home" class="screen active">
 
@@ -62,132 +60,75 @@ Configurar mensaje
 
 </section>
 
-<!-- CREAR -->
-
 <section id="create" class="screen">
 
 <h2>Crear mensaje</h2>
 
-<textarea
-id="message"
-placeholder="Escribe tu mensaje"></textarea>
+<textarea id="message" placeholder="Escribe tu mensaje"></textarea>
 
-<input
-type="password"
-id="password"
-placeholder="Contraseña">
+<input type="password" id="password" placeholder="Contraseña">
 
-<input
-type="number"
-id="time"
-placeholder="Tiempo">
+<input type="number" id="time" placeholder="Tiempo">
 
 <select id="unit">
-
 <option value="minutes">Minutos</option>
-
 <option value="hours">Horas</option>
-
 <option value="days">Días</option>
-
 </select>
 
 <label class="checkbox">
-
 <input type="checkbox" id="allowDownload">
-
 Permitir descargar mensaje (.txt)
-
 </label>
 
-<button
-class="action-btn"
-onclick="createMessage()">
-
+<button class="action-btn" onclick="createMessage()">
 Crear mensaje
-
 </button>
 
 <div id="generatedCode"></div>
 
-<button
-class="back-btn"
-onclick="showScreen('home')">
-
+<button class="back-btn" onclick="showScreen('home')">
 Volver
-
 </button>
 
 </section>
-
-<!-- VER -->
 
 <section id="view" class="screen">
 
 <h2>Ver mensaje</h2>
 
-<input
-type="text"
-id="codeInput"
-placeholder="Código">
+<input type="text" id="codeInput" placeholder="Código">
 
-<input
-type="password"
-id="passwordInput"
-placeholder="Contraseña">
+<input type="password" id="passwordInput" placeholder="Contraseña">
 
-<button
-class="action-btn"
-onclick="checkMessage()">
-
+<button class="action-btn" onclick="checkMessage()">
 Ver mensaje
-
 </button>
 
 <div id="result"></div>
 
-<button
-class="back-btn"
-onclick="showScreen('home')">
-
+<button class="back-btn" onclick="showScreen('home')">
 Volver
-
 </button>
 
 </section>
-
-<!-- CONFIGURAR -->
 
 <section id="manage" class="screen">
 
 <h2>Configurar mensaje</h2>
 
-<input
-type="text"
-id="manageCode"
-placeholder="Código">
+<input type="text" id="manageCode" placeholder="Código">
 
-<input
-type="password"
-id="managePassword"
-placeholder="Contraseña">
+<input type="password" id="managePassword" placeholder="Contraseña">
 
-<button
-class="action-btn"
-onclick="loadMessage()">
-
+<button class="action-btn" onclick="loadMessage()">
 Acceder
-
 </button>
 
 <div id="managePanel"></div>
 
-<button
-class="back-btn"
-onclick="showScreen('home')">
-
+<button class="back-btn" onclick="showScreen('home')">
 Volver
-
 </button>
 
 </section>
