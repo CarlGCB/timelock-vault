@@ -1,4 +1,3 @@
-// script.js
 document.addEventListener("DOMContentLoaded", () => {
 
   let countdownInterval;
@@ -72,8 +71,8 @@ document.addEventListener("DOMContentLoaded", () => {
   async function checkMessage(){
     const code = document.getElementById("codeInput").value;
     const password = document.getElementById("passwordInput").value;
-    const doc = await db.collection("messages").doc(code).get();
     const result = document.getElementById("result");
+    const doc = await db.collection("messages").doc(code).get();
 
     if(!doc.exists){ result.innerText="Código no encontrado"; return; }
     const data = doc.data();
@@ -100,8 +99,8 @@ document.addEventListener("DOMContentLoaded", () => {
   async function loadMessage(){
     const code = document.getElementById("manageCode").value;
     const password = document.getElementById("managePassword").value;
-    const doc = await db.collection("messages").doc(code).get();
     const managePanel = document.getElementById("managePanel");
+    const doc = await db.collection("messages").doc(code).get();
 
     if(!doc.exists){ managePanel.innerText="Código no encontrado"; return; }
     const data = doc.data();
@@ -142,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("managePanel").innerHTML = "Tiempo ampliado correctamente";
   }
 
-  // Exportar funciones al scope global para que onclick las encuentre
+  // Exportar funciones al scope global
   window.showScreen = showScreen;
   window.createMessage = createMessage;
   window.checkMessage = checkMessage;
