@@ -1,12 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
 <meta charset="UTF-8">
 <title>TimeLock Vault</title>
-<link rel="stylesheet" href="style.css">
-</head>
 
+<!-- CSS -->
+<link rel="stylesheet" href="style.css">
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "TU_API_KEY",
+  authDomain: "TU_AUTH_DOMAIN",
+  projectId: "TU_PROJECT_ID",
+  storageBucket: "TU_STORAGE_BUCKET",
+  messagingSenderId: "TU_SENDER_ID",
+  appId: "TU_APP_ID"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+</script>
+
+</head>
 <body>
 
 <header>
@@ -18,103 +36,53 @@
 
 <!-- HOME -->
 <section id="home" class="screen active">
-
-<button class="main-btn" onclick="showScreen('create')">
-Crear mensaje
-</button>
-
-<button class="main-btn" onclick="showScreen('view')">
-Ver mensaje
-</button>
-
-<button class="main-btn" onclick="showScreen('manage')">
-Configurar mensaje
-</button>
-
+<button class="main-btn" onclick="showScreen('create')">Crear mensaje</button>
+<button class="main-btn" onclick="showScreen('view')">Ver mensaje</button>
+<button class="main-btn" onclick="showScreen('manage')">Configurar mensaje</button>
 </section>
-
 
 <!-- CREAR -->
 <section id="create" class="screen">
-
 <h2>Crear mensaje</h2>
-
 <textarea id="message" placeholder="Escribe tu mensaje"></textarea>
-
 <input type="password" id="password" placeholder="Contraseña">
-
 <input type="number" id="time" placeholder="Tiempo">
-
 <select id="unit">
 <option value="minutes">Minutos</option>
 <option value="hours">Horas</option>
 <option value="days">Días</option>
 </select>
-
 <label class="checkbox">
-<input type="checkbox" id="allowDownload">
-Permitir descargar mensaje (.txt)
+<input type="checkbox" id="allowDownload"> Permitir descargar mensaje (.txt)
 </label>
-
-<button class="action-btn" onclick="createMessage()">
-Crear mensaje
-</button>
-
+<button class="action-btn" onclick="createMessage()">Crear mensaje</button>
 <div id="generatedCode"></div>
-
-<button class="back-btn" onclick="showScreen('home')">
-Volver
-</button>
-
+<button class="back-btn" onclick="showScreen('home')">Volver</button>
 </section>
-
 
 <!-- VER -->
 <section id="view" class="screen">
-
 <h2>Ver mensaje</h2>
-
 <input type="text" id="codeInput" placeholder="Código">
-
 <input type="password" id="passwordInput" placeholder="Contraseña">
-
-<button class="action-btn" onclick="checkMessage()">
-Ver mensaje
-</button>
-
+<button class="action-btn" onclick="checkMessage()">Ver mensaje</button>
 <div id="result"></div>
-
-<button class="back-btn" onclick="showScreen('home')">
-Volver
-</button>
-
+<button class="back-btn" onclick="showScreen('home')">Volver</button>
 </section>
-
 
 <!-- CONFIGURAR -->
 <section id="manage" class="screen">
-
 <h2>Configurar mensaje</h2>
-
 <input type="text" id="manageCode" placeholder="Código">
-
 <input type="password" id="managePassword" placeholder="Contraseña">
-
-<button class="action-btn" onclick="loadMessage()">
-Acceder
-</button>
-
+<button class="action-btn" onclick="loadMessage()">Acceder</button>
 <div id="managePanel"></div>
-
-<button class="back-btn" onclick="showScreen('home')">
-Volver
-</button>
-
+<button class="back-btn" onclick="showScreen('home')">Volver</button>
 </section>
 
-</main>
-
+<!-- JS -->
 <script src="script.js"></script>
 
+</main>
 </body>
 </html>
